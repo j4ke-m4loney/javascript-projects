@@ -1,3 +1,6 @@
+
+// Provide a grade based on score
+
 function getGrade(score) {
   if (score === 100) {
     return "A++";
@@ -18,3 +21,14 @@ function getGrade(score) {
 console.log(getGrade(96));
 console.log(getGrade(82));
 console.log(getGrade(56));
+
+// Provide true of false for a pass based on Score
+
+function hasPassingGrade(score) {
+  let grade = getGrade(score);
+  return grade !== "F"
+}
+
+console.log(hasPassingGrade(100));
+console.log(hasPassingGrade(53));
+console.log(hasPassingGrade(87));
