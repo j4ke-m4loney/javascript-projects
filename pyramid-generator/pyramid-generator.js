@@ -1,4 +1,4 @@
-const character = "!";
+const character = "0";
 const count = 10;
 const rows = [];
 let inverted = false;
