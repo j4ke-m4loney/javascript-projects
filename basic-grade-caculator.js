@@ -22,7 +22,7 @@ console.log(getGrade(96));
 console.log(getGrade(82));
 console.log(getGrade(56));
 
-// Provide true of false for a pass based on Score
+// Provide an answer of false for a pass based on Score
 
 function hasPassingGrade(score) {
   let grade = getGrade(score);
