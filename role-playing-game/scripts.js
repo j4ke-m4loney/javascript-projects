@@ -218,3 +218,4 @@ function restart() {
   xpText.innerText = xp;
   goTown();
 }
+// Need to add remaining functions 
