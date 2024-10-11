@@ -19,3 +19,9 @@ function isInvalidInput(str) {
   return str.match(regex);
 }
 // result is null from test: console.log(isInvalidInput("10"));
+
+// Accepting entries from dropdown
+function addEntry() {
+  const targetId = '#' + entryDropdown.value;
+  const targetInputContainer = document.querySelector(targetId + ' .input-container');
+}
