@@ -14,3 +14,46 @@ function getRandomComputerResult() {
 
 }
 console.log(getRandomComputerResult());
+
+let playerScore = 0;
+let computerScore = 0;
+
+function hasPlayerWonTheRound(player, computer) {
+
+  // Check if the player has chosen "Rock" and the computer has chosen "Scissors"
+  // This is a winning combination for the player
+  return (
+    (player === "Rock" && computer === "Scissors") ||
+
+    // Check if the player has chosen "Scissors" and the computer has chosen "Paper"
+    // This is another winning combination for the player
+    (player === "Scissors" && computer === "Paper") ||
+
+    // Check if the player has chosen "Paper" and the computer has chosen "Rock"
+    // This is the third winning combination for the player
+    (player === "Paper" && computer === "Rock")
+  );
+}
+
+function getRoundResults(userOption) {
+  // Get the computer's choice using the getRandomComputerResult function
+  const computerResult = getRandomComputerResult();
+
+  // Check if the player has won the round
+  if (hasPlayerWonTheRound(userOption, computerResult) === true) {
+    playerScore += 1;  // Increment the player's score
+    return `Player wins! ${userOption} beats ${computerResult}`;  // Return a message for player victory
+  }
+  // Check if the round is a tie
+  else if (userOption === computerResult) {
+    return `It's a tie! Both chose ${userOption}`;  // Return a message for a tie
+  }
+  // If the computer won the round
+  else {
+    computerScore += 1;  // Increment the computer's score
+    return `Computer wins! ${computerResult} beats ${userOption}`;  // Return a message for computer victory
+  }
+}
+
+console.log(getRoundResults("Rock"));  // Test the function with the player's choice as "Rock"
+console.log("Player Score: ", playerScore, "Computer Score: ", computerScore);  // Output the scores
