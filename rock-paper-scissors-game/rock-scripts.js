@@ -57,3 +57,5 @@ function getRoundResults(userOption) {
 
 console.log(getRoundResults("Rock"));  // Test the function with the player's choice as "Rock"
 console.log("Player Score: ", playerScore, "Computer Score: ", computerScore);  // Output the scores
+
+// Working through next function
