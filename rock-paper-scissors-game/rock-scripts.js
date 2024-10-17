@@ -58,4 +58,22 @@ function getRoundResults(userOption) {
 console.log(getRoundResults("Rock"));  // Test the function with the player's choice as "Rock"
 console.log("Player Score: ", playerScore, "Computer Score: ", computerScore);  // Output the scores
 
-// Working through next function
+
+// Now it is time to update the scores and the round results message.
+
+const playerScoreSpanElement = document.getElementById("player-score");  // Get the player score element from the DOM
+const computerScoreSpanElement = document.getElementById("computer-score");  // Get the computer score element from the DOM
+const roundResultsMsg = document.getElementById("results-msg");  // Get the element that will display the round result message
+
+function showResults(userOption) {
+  const roundResult = getRoundResults(userOption);  // Call getRoundResults to determine the winner of the round
+
+  // Update the player and computer scores in the DOM
+  playerScoreSpanElement.innerText = playerScore;
+  computerScoreSpanElement.innerText = computerScore;
+
+  // Update the DOM with the round result message
+  roundResultsMsg.innerText = roundResult;
+};
+
+showResults("Rock");  // Call the showResults function, simulating the player choosing "Rock"
