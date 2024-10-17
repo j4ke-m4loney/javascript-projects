@@ -74,6 +74,53 @@ function showResults(userOption) {
 
   // Update the DOM with the round result message
   roundResultsMsg.innerText = roundResult;
+
+  // Check if either the player or the computer has reached 3 points
+  if (playerScore === 3) {
+    winnerMsgElement.innerText = "Player has won the game!";
+    resetGameBtn.style.display = "block";  // Show the reset button
+    optionsContainer.style.display = "none";  // Hide game options
+  } else if (computerScore === 3) {
+    winnerMsgElement.innerText = "Computer has won the game!";
+    resetGameBtn.style.display = "block";  // Show the reset button
+    optionsContainer.style.display = "none";  // Hide game options
+  }
 };
 
-showResults("Rock");  // Call the showResults function, simulating the player choosing "Rock"
+function resetGame() {
+  // Reset player and computer scores to 0
+  playerScore = 0;
+  computerScore = 0;
+
+  // Update the player and computer score displays
+  playerScoreSpanElement.innerText = playerScore;
+  computerScoreSpanElement.innerText = computerScore;
+
+  // Hide the reset button
+  resetGameBtn.style.display = "none";
+
+  // Show the game options again
+  optionsContainer.style.display = "block";
+
+  // Clear the winner message and round result message
+  winnerMsgElement.innerText = "";
+  roundResultsMsg.innerText = "";
+};
+
+resetGameBtn.addEventListener("click", resetGame);
+
+const rockBtn = document.getElementById("rock-btn");
+const paperBtn = document.getElementById("paper-btn");
+const scissorsBtn = document.getElementById("scissors-btn");
+
+rockBtn.addEventListener("click", function () {
+  showResults("Rock");
+});
+
+paperBtn.addEventListener("click", function () {
+  showResults("Paper");
+});
+
+scissorsBtn.addEventListener("click", function () {
+  showResults("Scissors");
+});
