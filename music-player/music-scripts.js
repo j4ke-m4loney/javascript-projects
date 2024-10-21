@@ -85,7 +85,23 @@ let userData = {
   songCurrentTime: 0,
 };
 
+// Looks for a song in the userData list with a matching id. If found, it assigns it to the song variable
 
+const playSong = (id) => {
+  const song = userData?.songs.find((song) => song.id === id);
+  audio.src = song.src;
+  audio.title = song.title;
+
+  if (userData?.currentSong === null || userData?.currentSong.id !== song.id) {
+    audio.currentTime = 0;
+  } else {
+    audio.currentTime = userData?.songCurrentTime;
+  }
+  userData.currentSong = song;
+  playButton.classList.add("playing");
+
+  audio.play();
+};
 
 const renderSongs = (array) => {
   const songsHTML = array
