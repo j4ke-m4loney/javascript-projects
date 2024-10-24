@@ -85,8 +85,6 @@ let userData = {
   songCurrentTime: 0,
 };
 
-// Looks for a song in the userData list with a matching id. If found, it assigns it to the song variable
-
 const playSong = (id) => {
   const song = userData?.songs.find((song) => song.id === id);
   audio.src = song.src;
@@ -103,12 +101,35 @@ const playSong = (id) => {
   audio.play();
 };
 
+const pauseSong = () => {
+  userData.songCurrentTime = audio.currentTime;
+
+  playButton.classList.remove("playing");
+  audio.pause();
+};
+
+const playNextSong = () => {
+
+  if (userData?.currentSong === null) {
+    playSong(userData?.songs[0].id);
+  } else {
+    const currentSongIndex = getCurrentSongIndex();
+    const nextSong = userData?.songs[currentSongIndex + 1];
+
+    playSong(nextSong.id);
+  }
+};
+
+const playPreviousSong = () => {
+
+};
+
 const renderSongs = (array) => {
   const songsHTML = array
     .map((song) => {
       return `
       <li id="song-${song.id}" class="playlist-song">
-      <button class="playlist-song-info">
+      <button class="playlist-song-info" onclick="playSong(${song.id})">
           <span class="playlist-song-title">${song.title}</span>
           <span class="playlist-song-artist">${song.artist}</span>
           <span class="playlist-song-duration">${song.duration}</span>
@@ -124,7 +145,21 @@ const renderSongs = (array) => {
 
   playlistSongs.innerHTML = songsHTML;
 };
-// Arrow function to sort songs in alphabetic order 
+
+const getCurrentSongIndex = () => userData?.songs.indexOf(userData?.currentSong);
+
+playButton.addEventListener("click", () => {
+  if (userData?.currentSong === null) {
+    playSong(userData?.songs[0].id);
+  } else {
+    playSong(userData?.currentSong.id);
+  }
+});
+
+pauseButton.addEventListener("click", pauseSong);
+
+nextButton.addEventListener("click", playNextSong);
+
 const sortSongs = () => {
   userData?.songs.sort((a, b) => {
     if (a.title < b.title) {
