@@ -1,26 +1,28 @@
-#JavaScript Music Player 🎶
-This JavaScript-based music player allows users to play, pause, skip, shuffle, and delete songs from a playlist. The player also provides features such as song highlighting, accessible controls, and playlist reset functionality.
+# JavaScript Music Player 🎶
 
-##Features
-Play, Pause, and Skip Tracks: Control song playback with dedicated buttons.
-Shuffle Playlist: Randomize the order of songs in the playlist.
-Delete and Reset Songs: Remove songs from the list or reset the playlist.
-Current Song Display: Show song details, including title, artist, and duration.
+This JavaScript-based music player allows users to play, pause, skip, shuffle, and delete songs from a playlist. It also displays song information and includes accessible controls.
 
-##Code Structure
-playSong(id): Plays a song by its ID.
-pauseSong(): Pauses the current song.
-playNextSong() and playPreviousSong(): Skip to the next or previous song.
-shuffle(): Randomizes the order of songs in the playlist.
-deleteSong(id): Deletes a song and updates the playlist.
-renderSongs(array): Renders song list in the playlist container.
+## Features
+- **Play, Pause, and Skip Tracks**: Control playback with ease.
+- **Shuffle Playlist**: Randomize song order.
+- **Delete and Reset Playlist**: Remove or reset songs.
+- **Display Current Song**: Shows title, artist, and duration.
 
-##Getting Started
-Clone the repository.
-Open the HTML file in a web browser.
-Use the controls to interact with the music player.
-Customization
-Add or edit song objects in the allSongs array to customize the playlist.
+## Code Structure
+- **Main Functions**:
+  - `playSong(id)`: Plays a song by ID.
+  - `pauseSong()`, `playNextSong()`, `playPreviousSong()`: Control playback.
+  - `shuffle()`: Shuffles the song order.
+  - `deleteSong(id)`: Deletes a song.
+  - `renderSongs(array)`: Renders playlist songs.
 
-License
-This project is open source and available for modification and personal use.
+## Getting Started
+1. Clone the repository.
+2. Open the HTML file in a browser.
+3. Interact with the player using on-screen controls.
+
+## Customization
+Add or edit songs in the `allSongs` array to modify the playlist.
+
+## License
+Open-source for personal use and modification.
