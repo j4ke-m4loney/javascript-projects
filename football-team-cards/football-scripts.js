@@ -196,6 +196,8 @@ const setPlayerCards = (arr = players) => {
     .join("");
 };
 
+// Sorting the filtering of the players cards 
+
 playersDropdownList.addEventListener("change", (e) => {
   playerCards.innerHTML = "";
 
