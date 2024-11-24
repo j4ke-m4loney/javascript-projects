@@ -11,6 +11,7 @@ const getMedian = (array) => {
 
 const getMode = (array) => {
   const counts = {};
+  // This was originally a ternary operator - array.forEach(el) => counts[el] = counts[el] ? counts[el] + 1 : 1;
   array.forEach((el) => {
     counts[el] = (counts[el] || 0) + 1;
   })
