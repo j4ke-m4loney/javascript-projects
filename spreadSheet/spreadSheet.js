@@ -1,3 +1,18 @@
+const infixToFunction = {
+  "+": (x, y) => x + y,
+  "-": (x, y) => x - y,
+  "*": (x, y) => x * y,
+  "/": (x, y) => x / y,
+}
+
+const infixEval = (str, regex) => str.replace(regex, (_match, arg1, operator, arg2) => infixToFunction[operator](parseFloat(arg1), parseFloat(arg2)));
+
+const highPrecedence = str => {
+  const regex = /([\d.]+)([*\/])([\d.]+)/;
+  const str2 = infixEval(str, regex);
+
+}
+
 const isEven = num => num % 2 === 0;
 const sum = nums => nums.reduce((acc, el) => acc + el, 0);
 const average = nums => sum(nums) / nums.length;
@@ -26,7 +41,9 @@ const evalFormula = (x, cells) => {
   const rangeFromString = (num1, num2) => range(parseInt(num1), parseInt(num2));
   const elemValue = num => character => idToText(character + num);
   const addCharacters = character1 => character2 => num => charRange(character1, character2).map(elemValue(num));
-  const rangeExpanded = x.replace(rangeRegex, (match, char1, num1, char2, num2) => rangeFromString(num1, num2).map(addCharacters(char1)(char2)));
+  const rangeExpanded = x.replace(rangeRegex, (_match, char1, num1, char2, num2) => rangeFromString(num1, num2).map(addCharacters(char1)(char2)));
+  const cellRegex = /[A-J][1-9][0-9]?/gi;
+  const cellExpanded = rangeExpanded.replace(cellRegex, match => idToText(match.toUpperCase()));
 }
 
 window.onload = () => {
