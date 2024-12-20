@@ -17,3 +17,5 @@ let round = 1;
 let rolls = 0;
 
 rulesBtn.addEventListener("click")
+
+// I will continue this tomorrow morning 
