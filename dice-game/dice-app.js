@@ -16,6 +16,21 @@ let score = 0;
 let round = 1;
 let rolls = 0;
 
+// Event listener for rolling the dice
+rollDiceBtn.addEventListener("click", () => {
+  // Generate five random numbers between 1 and 6
+  diceValuesArr = Array.from({ length: 5 }, () => Math.floor(Math.random() * 6) + 1);
+
+  // Display the numbers in the dice elements
+  listOfAllDice.forEach((die, index) => {
+    die.textContent = diceValuesArr[index]; // Update each die with the corresponding value
+  });
+
+  console.log("Dice values:", diceValuesArr); // Debug: Log dice values
+});
+
+// Event Listener to Toggle between showing and hiding the rules
+
 rulesBtn.addEventListener("click", () => {
   isModalShowing = !isModalShowing; // Toggle state
 
