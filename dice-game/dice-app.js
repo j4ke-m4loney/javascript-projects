@@ -16,6 +16,14 @@ let score = 0;
 let round = 1;
 let rolls = 0;
 
-rulesBtn.addEventListener("click")
+rulesBtn.addEventListener("click", () => {
+  isModalShowing = !isModalShowing; // Toggle state
 
-// I will continue this tomorrow morning 
+  if (isModalShowing) {
+    rulesContainer.style.display = "block"; // Show rules
+    rulesBtn.textContent = "Hide rules"; // Update button text
+  } else {
+    rulesContainer.style.display = "none"; // Hide rules
+    rulesBtn.textContent = "Show rules"; // Update button text
+  }
+});
