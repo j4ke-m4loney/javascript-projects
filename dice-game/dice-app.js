@@ -29,6 +29,21 @@ rollDiceBtn.addEventListener("click", () => {
   console.log("Dice values:", diceValuesArr); // Debug: Log dice values
 });
 
+// Add a click event listener to the "Roll the Dice" button
+rollDiceBtn.addEventListener("click", () => {
+  // Check if the user has already made 3 rolls in this round
+  if (rolls === 3) {
+    // Alert the user that they cannot roll more than 3 times
+    alert("You have made three rolls this round. Please select a score.");
+  } else {
+    // Increment the roll count, as the user is rolling again
+    rolls++;
+
+    // Call the rollDice function to generate new dice values and update the display
+    rollDice();
+  }
+});
+
 // Event Listener to Toggle between showing and hiding the rules
 
 rulesBtn.addEventListener("click", () => {
