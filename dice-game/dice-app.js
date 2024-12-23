@@ -74,6 +74,26 @@ const resetRadioOptions = () => {
 }
 
 
+// Resetting game function
+const resetGame = () => {
+  listOfAllDice.forEach(dice => {
+    dice.textContent = "0"
+  });
+  score = 0;
+  rolls = 0;
+  round = 1;
+  totalScoreElement.textContent = score;
+  scoreHistory.textContent = ""
+  rollsElement.textContent = rolls;
+  roundElement.textContent = round;
+  scoreInputs.forEach(input => {
+    input.checked = false;
+    input.disabled = true;
+    input.value = "";
+  })
+};
+
+
 rollDiceBtn.addEventListener("click", () => {
   if (rolls === 3) {
     alert("You have made three rolls this round. Please select a score.");
@@ -89,12 +109,22 @@ rollDiceBtn.addEventListener("click", () => {
 rulesBtn.addEventListener("click", () => {
   isModalShowing = !isModalShowing;
 
-  if (isModalShowing) {
-    rulesBtn.textContent = "Hide rules";
-    rulesContainer.style.display = "block";
+  if (selectedValue) {
+    rolls = 0;
+    round++;
+    updateStats();
+    resetRadioOptions();
+    updateScore(selectedValue, achieved);
+
+    // Checks if game has reached 6 rounds to end game
+    if (round > 6) {
+      setTimeout(() => {
+        alert(`Game Over! Your total score is ${score}`);
+      }, 500);
+      resetGame();
+    }
   } else {
-    rulesBtn.textContent = "Show rules";
-    rulesContainer.style.display = "none";
+    alert("Please select an option or roll the dice");
   }
 });
 
