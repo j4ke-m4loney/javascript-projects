@@ -29,6 +29,11 @@ rollDiceBtn.addEventListener("click", () => {
   console.log("Dice values:", diceValuesArr); // Debug: Log dice values
 });
 
+const updateStats = () => {
+  rollsElement.textContent = rolls;
+  roundElement.textContent = round;
+};
+
 // Add a click event listener to the "Roll the Dice" button
 rollDiceBtn.addEventListener("click", () => {
   // Check if the user has already made 3 rolls in this round
@@ -41,6 +46,8 @@ rollDiceBtn.addEventListener("click", () => {
 
     // Call the rollDice function to generate new dice values and update the display
     rollDice();
+    updateStats();
+
   }
 });
 
