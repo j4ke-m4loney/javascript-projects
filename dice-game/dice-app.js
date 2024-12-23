@@ -97,3 +97,17 @@ rulesBtn.addEventListener("click", () => {
     rulesContainer.style.display = "none";
   }
 });
+
+keepScoreBtn.addEventListener("click", () => {
+
+  for (let i = 0; i < scoreInputs.length; i++) {
+    if (scoreInputs[i].checked) {
+      // Step 2: Update the score and reset options
+      updateScore(scoreInputs[i].value, scoreInputs[i].id);
+      resetRadioOptions();
+      return; // Exit the loop after handling the selection
+    }
+  }
+  // Step 3: Alert the user if no option is selected
+  alert("Please select an option");
+});
