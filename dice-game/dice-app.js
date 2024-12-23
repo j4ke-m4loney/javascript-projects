@@ -16,51 +16,66 @@ let score = 0;
 let round = 1;
 let rolls = 0;
 
-// Event listener for rolling the dice
-rollDiceBtn.addEventListener("click", () => {
-  // Generate five random numbers between 1 and 6
-  diceValuesArr = Array.from({ length: 5 }, () => Math.floor(Math.random() * 6) + 1);
+const rollDice = () => {
+  diceValuesArr = [];
 
-  // Display the numbers in the dice elements
-  listOfAllDice.forEach((die, index) => {
-    die.textContent = diceValuesArr[index]; // Update each die with the corresponding value
+  for (let i = 0; i < 5; i++) {
+    const randomDice = Math.floor(Math.random() * 6) + 1;
+    diceValuesArr.push(randomDice);
+  };
+
+  listOfAllDice.forEach((dice, index) => {
+    dice.textContent = diceValuesArr[index];
   });
-
-  console.log("Dice values:", diceValuesArr); // Debug: Log dice values
-});
+};
 
 const updateStats = () => {
   rollsElement.textContent = rolls;
   roundElement.textContent = round;
 };
 
-// Add a click event listener to the "Roll the Dice" button
+const updateRadioOption = (index, score) => {
+  scoreInputs[index].disabled = false;
+  scoreInputs[index].value = score;
+  scoreSpans[index].textContent = `, score = ${score}`;
+};
+
+const getHighestDuplicates = (diceValuesArr) => {
+  const counts = {};
+  diceValuesArr.forEach(num => {
+    counts[num] = (counts[num] || 0) + 1;
+  });
+
+  const totalSum = diceValuesArr.reduce((sum, num) => sum + num, 0);
+  if (Object.values(counts).some(count => count >= 4)) {
+    updateRadioOption(1, totalSum);
+  }
+  if (Object.values(counts).some(count => count >= 3)) {
+    updateRadioOption(0, totalSum);
+  }
+  updateRadioOption(5, 0)
+};
+
+
 rollDiceBtn.addEventListener("click", () => {
-  // Check if the user has already made 3 rolls in this round
   if (rolls === 3) {
-    // Alert the user that they cannot roll more than 3 times
     alert("You have made three rolls this round. Please select a score.");
   } else {
-    // Increment the roll count, as the user is rolling again
     rolls++;
-
-    // Call the rollDice function to generate new dice values and update the display
     rollDice();
     updateStats();
-
+    getHighestDuplicates(diceValuesArr);
   }
 });
 
-// Event Listener to Toggle between showing and hiding the rules
-
 rulesBtn.addEventListener("click", () => {
-  isModalShowing = !isModalShowing; // Toggle state
+  isModalShowing = !isModalShowing;
 
   if (isModalShowing) {
-    rulesContainer.style.display = "block"; // Show rules
-    rulesBtn.textContent = "Hide rules"; // Update button text
+    rulesBtn.textContent = "Hide rules";
+    rulesContainer.style.display = "block";
   } else {
-    rulesContainer.style.display = "none"; // Hide rules
-    rulesBtn.textContent = "Show rules"; // Update button text
+    rulesBtn.textContent = "Show rules";
+    rulesContainer.style.display = "none";
   }
 });
