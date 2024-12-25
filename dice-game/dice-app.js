@@ -63,6 +63,37 @@ const getHighestDuplicates = (diceValuesArr) => {
   updateRadioOption(5, 0)
 };
 
+const detectFullHouse = (diceValuesArr) => {
+  let counts = {}; // Object to count occurrences of each number
+
+  // Count occurrences of each number in diceValuesArr
+  for (const num of diceValuesArr) {
+    counts[num] = (counts[num] || 0) + 1;
+  }
+
+  // Initialize counts for Full House conditions
+  let threeCount = 0;
+  let twoCount = 0;
+
+  // Check counts for Full House
+  for (const count of Object.values(counts)) {
+    if (count === 3) {
+      threeCount = 1;
+    }
+    if (count === 2) {
+      twoCount = 1;
+    }
+  }
+
+  // Check if Full House exists
+  if (threeCount === 1 && twoCount === 1) {
+    updateRadioOption(2, 25); // Full House: Update with 25 points
+  }
+
+  // Always update the last radio button with 0
+  updateRadioOption(5, 0);
+};
+
 const resetRadioOptions = () => {
   scoreInputs.forEach(input => {
     input.disabled = true;
