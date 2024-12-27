@@ -124,6 +124,10 @@ const resetGame = () => {
   })
 };
 
+// Checking for straights 
+const checkForStraights = (diceValuesArr) => {
+  const num = [];
+};
 
 rollDiceBtn.addEventListener("click", () => {
   if (rolls === 3) {
