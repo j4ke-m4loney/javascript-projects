@@ -124,7 +124,7 @@ const resetGame = () => {
   })
 };
 
-// Checking for straights  
+// Checking for straights and updating scores for radio buttons
 
 const checkForStraights = (diceValuesArr) => {
   // Step 1: Remove duplicates and sort the array
