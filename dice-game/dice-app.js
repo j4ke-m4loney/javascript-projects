@@ -47,129 +47,128 @@ const updateScore = (selectedValue, achieved) => {
   scoreHistory.innerHTML += `<li>${achieved} : ${selectedValue}</li>`;
 };
 
-const getHighestDuplicates = (diceValuesArr) => {
+const getHighestDuplicates = (arr) => {
   const counts = {};
-  diceValuesArr.forEach(num => {
-    counts[num] = (counts[num] || 0) + 1;
-  });
 
-  const totalSum = diceValuesArr.reduce((sum, num) => sum + num, 0);
-  if (Object.values(counts).some(count => count >= 4)) {
-    updateRadioOption(1, totalSum);
+  for (const num of arr) {
+    if (counts[num]) {
+      counts[num]++;
+    } else {
+      counts[num] = 1;
+    }
   }
-  if (Object.values(counts).some(count => count >= 3)) {
-    updateRadioOption(0, totalSum);
+
+  let highestCount = 0;
+
+  for (const num of arr) {
+    const count = counts[num];
+    if (count >= 3 && count > highestCount) {
+      highestCount = count;
+    }
+    if (count >= 4 && count > highestCount) {
+      highestCount = count;
+    }
   }
-  updateRadioOption(5, 0)
+
+  const sumOfAllDice = arr.reduce((a, b) => a + b, 0);
+
+  if (highestCount >= 4) {
+    updateRadioOption(1, sumOfAllDice);
+  }
+
+  if (highestCount >= 3) {
+    updateRadioOption(0, sumOfAllDice);
+  }
+
+  updateRadioOption(5, 0);
 };
 
-const detectFullHouse = (diceValuesArr) => {
-  let counts = {}; // Object to count occurrences of each number
+const detectFullHouse = (arr) => {
+  const counts = {};
 
-  // Count occurrences of each number in diceValuesArr
-  for (const num of diceValuesArr) {
-    counts[num] = (counts[num] || 0) + 1;
+  for (const num of arr) {
+    counts[num] = counts[num] ? counts[num] + 1 : 1;
   }
 
-  // Initialize counts for Full House conditions
-  let threeCount = 0;
-  let twoCount = 0;
+  const hasThreeOfAKind = Object.values(counts).includes(3);
+  const hasPair = Object.values(counts).includes(2);
 
-  // Check counts for Full House
-  for (const count of Object.values(counts)) {
-    if (count === 3) {
-      threeCount = 1;
-    }
-    if (count === 2) {
-      twoCount = 1;
-    }
+  if (hasThreeOfAKind && hasPair) {
+    updateRadioOption(2, 25);
   }
 
-  // Check if Full House exists
-  if (threeCount === 1 && twoCount === 1) {
-    updateRadioOption(2, 25); // Full House: Update with 25 points
-  }
-
-  // Always update the last radio button with 0
   updateRadioOption(5, 0);
 };
 
 const resetRadioOptions = () => {
-  scoreInputs.forEach(input => {
+  scoreInputs.forEach((input) => {
     input.disabled = true;
     input.checked = false;
   });
-  scoreSpans.forEach(span => {
+
+  scoreSpans.forEach((span) => {
     span.textContent = "";
   });
-}
+};
 
-
-// Resetting game function
 const resetGame = () => {
-  listOfAllDice.forEach(dice => {
-    dice.textContent = "0"
-  });
+  diceValuesArr = [0, 0, 0, 0, 0];
   score = 0;
-  rolls = 0;
   round = 1;
+  rolls = 0;
+
+  listOfAllDice.forEach((dice, index) => {
+    dice.textContent = diceValuesArr[index];
+  });
+
   totalScoreElement.textContent = score;
-  scoreHistory.textContent = ""
+  scoreHistory.innerHTML = "";
+
   rollsElement.textContent = rolls;
   roundElement.textContent = round;
-  scoreInputs.forEach(input => {
-    input.checked = false;
-    input.disabled = true;
-    input.value = "";
-  })
+
+  resetRadioOptions();
 };
 
-// Checking for straights and updating scores for radio buttons
 
-const checkForStraights = (diceValuesArr) => {
-  // Step 1: Remove duplicates and sort the array
-  const uniqueValues = [...new Set(diceValuesArr)].sort((a, b) => a - b);
 
-  // Step 2: Check for large straight (all 5 consecutive numbers)
-  let isLargeStraight = true;
-  for (let i = 0; i < uniqueValues.length - 1; i++) {
-    if (uniqueValues[i + 1] - uniqueValues[i] !== 1) {
-      isLargeStraight = false;
-      break;
-    }
-  }
-
-  if (isLargeStraight && uniqueValues.length === 5) {
-    // Update both large and small straight options
-    updateRadioOption(4, 40); // Large straight: 40 points
-    updateRadioOption(3, 30); // Small straight: 30 points (enabled as well)
-    return;
-  }
-
-  // Step 3: Check for small straight (4 consecutive numbers)
-  let isSmallStraight = false;
-  for (let i = 0; i <= uniqueValues.length - 4; i++) {
-    if (
-      uniqueValues[i + 1] - uniqueValues[i] === 1 &&
-      uniqueValues[i + 2] - uniqueValues[i + 1] === 1 &&
-      uniqueValues[i + 3] - uniqueValues[i + 2] === 1
-    ) {
-      isSmallStraight = true;
-      break;
-    }
-  }
-
-  if (isSmallStraight) {
-    updateRadioOption(3, 30); // Small straight: 30 points
-    updateRadioOption(5, 0); // No straight: 0 points for the last option
+rollDiceBtn.addEventListener("click", () => {
+  if (rolls === 3) {
+    alert("You have made three rolls this round. Please select a score.");
   } else {
-    // No straight found
-    updateRadioOption(5, 0); // No straight: 0 points
+    rolls++;
+    resetRadioOptions();
+    rollDice();
+    updateStats();
+    getHighestDuplicates(diceValuesArr);
+    detectFullHouse(diceValuesArr);
+
   }
-};
+});
 
 rulesBtn.addEventListener("click", () => {
   isModalShowing = !isModalShowing;
+
+  if (isModalShowing) {
+    rulesBtn.textContent = "Hide rules";
+    rulesContainer.style.display = "block";
+  } else {
+    rulesBtn.textContent = "Show rules";
+    rulesContainer.style.display = "none";
+  }
+});
+
+keepScoreBtn.addEventListener("click", () => {
+  let selectedValue;
+  let achieved;
+
+  for (const radioButton of scoreInputs) {
+    if (radioButton.checked) {
+      selectedValue = radioButton.value;
+      achieved = radioButton.id;
+      break;
+    }
+  }
 
   if (selectedValue) {
     rolls = 0;
@@ -177,29 +176,13 @@ rulesBtn.addEventListener("click", () => {
     updateStats();
     resetRadioOptions();
     updateScore(selectedValue, achieved);
-
-    // Checks if game has reached 6 rounds to end game
     if (round > 6) {
       setTimeout(() => {
         alert(`Game Over! Your total score is ${score}`);
+        resetGame();
       }, 500);
-      resetGame();
     }
   } else {
     alert("Please select an option or roll the dice");
   }
-});
-
-keepScoreBtn.addEventListener("click", () => {
-
-  for (let i = 0; i < scoreInputs.length; i++) {
-    if (scoreInputs[i].checked) {
-      // Step 2: Update the score and reset options
-      updateScore(scoreInputs[i].value, scoreInputs[i].id);
-      resetRadioOptions();
-      return; // Exit the loop after handling the selection
-    }
-  }
-  // Step 3: Alert the user if no option is selected
-  alert("Please select an option");
 });
