@@ -124,22 +124,49 @@ const resetGame = () => {
   })
 };
 
-// Checking for straights 
-const checkForStraights = (diceValuesArr) => {
-  const num = [];
-};
+// Checking for straights  
 
-rollDiceBtn.addEventListener("click", () => {
-  if (rolls === 3) {
-    alert("You have made three rolls this round. Please select a score.");
-  } else {
-    resetRadioOptions();
-    rolls++;
-    rollDice();
-    updateStats();
-    getHighestDuplicates(diceValuesArr);
+const checkForStraights = (diceValuesArr) => {
+  // Step 1: Remove duplicates and sort the array
+  const uniqueValues = [...new Set(diceValuesArr)].sort((a, b) => a - b);
+
+  // Step 2: Check for large straight (all 5 consecutive numbers)
+  let isLargeStraight = true;
+  for (let i = 0; i < uniqueValues.length - 1; i++) {
+    if (uniqueValues[i + 1] - uniqueValues[i] !== 1) {
+      isLargeStraight = false;
+      break;
+    }
   }
-});
+
+  if (isLargeStraight && uniqueValues.length === 5) {
+    // Update both large and small straight options
+    updateRadioOption(4, 40); // Large straight: 40 points
+    updateRadioOption(3, 30); // Small straight: 30 points (enabled as well)
+    return;
+  }
+
+  // Step 3: Check for small straight (4 consecutive numbers)
+  let isSmallStraight = false;
+  for (let i = 0; i <= uniqueValues.length - 4; i++) {
+    if (
+      uniqueValues[i + 1] - uniqueValues[i] === 1 &&
+      uniqueValues[i + 2] - uniqueValues[i + 1] === 1 &&
+      uniqueValues[i + 3] - uniqueValues[i + 2] === 1
+    ) {
+      isSmallStraight = true;
+      break;
+    }
+  }
+
+  if (isSmallStraight) {
+    updateRadioOption(3, 30); // Small straight: 30 points
+    updateRadioOption(5, 0); // No straight: 0 points for the last option
+  } else {
+    // No straight found
+    updateRadioOption(5, 0); // No straight: 0 points
+  }
+};
 
 rulesBtn.addEventListener("click", () => {
   isModalShowing = !isModalShowing;
