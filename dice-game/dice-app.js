@@ -227,3 +227,4 @@ keepScoreBtn.addEventListener("click", () => {
     alert("Please select an option or roll the dice");
   }
 });
+// end game
