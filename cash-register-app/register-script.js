@@ -10,83 +10,25 @@ let cid = [
   ['TWENTY', 60],
   ['ONE HUNDRED', 100]
 ];
-const cash = document.getElementById("cash");
-const purchaseBtn = document.getElementById("purchase-btn");
-const changeDue = document.getElementById("change-due");
 
+// Event Listener for Purchase Button
+document.getElementById("purchase-btn").addEventListener("click", () => {
+  // Get the value of cash provided from the input
+  const cashInput = document.getElementById("cash").value;
+  const cash = parseFloat(cashInput); // Convert input to a number
 
-const calculateChange = (price, cash, cid) => {
+  // Validate the input
+  if (isNaN(cash) || cash <= 0) {
+    alert("Please enter a valid cash amount.");
+    return;
+  }
 
-}
-
-// Listens for purchase button
-
-addEventListener.purchaseBtn('click', (cash, price, cid) => {
-
-});
-
-
-// New code to check -------------------------------------
-
-function calculateChange(price, cash, cid) {
-  const changeDue = cash - price;
-
-  if (changeDue < 0) {
+  // Check if the cash provided is less than the price
+  if (cash < price) {
     alert("Customer does not have enough money to purchase the item.");
     return;
   }
 
-  if (changeDue === 0) {
-    document.getElementById("change-due").innerText = "No change due - customer paid with exact cash.";
-    return;
-  }
-
-  let changeArray = [];
-  const currencyValues = {
-    "PENNY": 0.01,
-    "NICKEL": 0.05,
-    "DIME": 0.1,
-    "QUARTER": 0.25,
-    "ONE": 1,
-    "FIVE": 5,
-    "TEN": 10,
-    "TWENTY": 20,
-    "ONE HUNDRED": 100,
-  };
-
-  let totalCashInDrawer = cid.reduce((total, [_, amount]) => total + amount, 0);
-  totalCashInDrawer = Math.round(totalCashInDrawer * 100) / 100; // Avoid floating-point issues
-
-  if (totalCashInDrawer < changeDue) {
-    document.getElementById("change-due").innerText = "Status: INSUFFICIENT_FUNDS";
-    return;
-  }
-
-  for (let i = cid.length - 1; i >= 0; i--) {
-    const [denomination, amountInDrawer] = cid[i];
-    const denominationValue = currencyValues[denomination];
-    let amountToReturn = 0;
-
-    while (changeDue >= denominationValue && amountInDrawer >= denominationValue) {
-      changeDue -= denominationValue;
-      changeDue = Math.round(changeDue * 100) / 100;
-      amountToReturn += denominationValue;
-    }
-
-    if (amountToReturn > 0) {
-      changeArray.push([denomination, amountToReturn]);
-    }
-  }
-
-  if (changeDue > 0) {
-    document.getElementById("change-due").innerText = "Status: INSUFFICIENT_FUNDS";
-    return;
-  }
-
-  const formattedChange = changeArray.map(([denomination, amount]) => `${denomination}: $${amount.toFixed(2)}`).join(" ");
-  if (totalCashInDrawer === changeDue) {
-    document.getElementById("change-due").innerText = `Status: CLOSED ${formattedChange}`;
-  } else {
-    document.getElementById("change-due").innerText = `Status: OPEN ${formattedChange}`;
-  }
-}
+  // Call the function to calculate change
+  calculateChange(price, cash, cid);
+});
