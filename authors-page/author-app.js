@@ -23,7 +23,10 @@ fetch('https://cdn.freecodecamp.org/curriculum/news-author-page/authors.json')
 // Doing this by adding a click event to the button and carefully incrementing the startingIndex and endingIndex variables.
 
 const fetchMoreAuthors = () => {
+  startingIndex += 8;
+  endingIndex += 8;
 
+  displayAuthors(authorDataArr.slice(startingIndex, endingIndex));
 };
 
 // Details of the authors to be presented on the page
