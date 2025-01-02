@@ -19,7 +19,12 @@ fetch('https://cdn.freecodecamp.org/curriculum/news-author-page/authors.json')
   });
 
 
+// Making the Load More Authors button fetch more authors whenever it's clicked. 
+// Doing this by adding a click event to the button and carefully incrementing the startingIndex and endingIndex variables.
 
+const fetchMoreAuthors = () => {
+
+};
 
 // Details of the authors to be presented on the page
 
