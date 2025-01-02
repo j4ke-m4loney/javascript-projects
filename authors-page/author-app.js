@@ -43,3 +43,7 @@ const displayAuthors = (authors) => {
   `;
   });
 };
+
+// Load More Authors Button event listener for when btn is clicked - 8 more authors will be added. 
+
+loadMoreBtn.addEventListener("click", fetchMoreAuthors)
