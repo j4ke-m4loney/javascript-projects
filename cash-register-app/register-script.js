@@ -50,9 +50,8 @@ document.getElementById("purchase-btn").addEventListener("click", () => {
   calculateChange(price, cash, cid);
 });
 
-// Function to Calculate Change
 function calculateChange(price, cash, cid) {
-  let changeDue = cash - price;
+  let changeDue = cash - price; // Calculate total change due
   let totalCashInDrawer = cid.reduce((total, [_, amount]) => total + amount, 0);
   totalCashInDrawer = Math.round(totalCashInDrawer * 100) / 100; // Avoid floating-point issues
 
@@ -84,12 +83,17 @@ function calculateChange(price, cash, cid) {
     return;
   }
 
-  if (totalCashInDrawer === cash - price) {
-    const formattedChange = changeArray.map(([denomination, amount]) => `${denomination}: $${amount.toFixed(2)}`).join(" ");
+  const changeTotal = changeArray.reduce((sum, [_, amount]) => sum + amount, 0);
+  if (changeTotal === totalCashInDrawer) {
+    const formattedChange = changeArray
+      .map(([denomination, amount]) => `${denomination}: $${amount.toFixed(2)}`)
+      .join(" ");
     document.getElementById("change-due").innerText = `Status: CLOSED ${formattedChange}`;
     return;
   }
 
-  const formattedChange = changeArray.map(([denomination, amount]) => `${denomination}: $${amount.toFixed(2)}`).join(" ");
+  const formattedChange = changeArray
+    .map(([denomination, amount]) => `${denomination}: $${amount.toFixed(2)}`)
+    .join(" ");
   document.getElementById("change-due").innerText = `Status: OPEN ${formattedChange}`;
 }
