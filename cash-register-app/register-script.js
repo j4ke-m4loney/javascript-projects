@@ -29,6 +29,12 @@ document.getElementById("purchase-btn").addEventListener("click", () => {
     return;
   }
 
-  // Call the function to calculate change
+  // Check if the cash provided is equal to the price
+  if (cash === price) {
+    document.getElementById("change-due").innerText = "No change due - customer paid with exact cash.";
+    return;
+  }
+
+  // Call the function to calculate change if cash > price
   calculateChange(price, cash, cid);
 });
