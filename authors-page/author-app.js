@@ -27,6 +27,11 @@ const fetchMoreAuthors = () => {
   endingIndex += 8;
 
   displayAuthors(authorDataArr.slice(startingIndex, endingIndex));
+
+  // Condition to show there is no more authors to load on the page
+  if (authorDataArr.length <= endingIndex) {
+
+  }
 };
 
 // Details of the authors to be presented on the page
