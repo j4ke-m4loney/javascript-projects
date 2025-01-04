@@ -30,7 +30,8 @@ const fetchMoreAuthors = () => {
 
   // Condition to show there is no more authors to load on the page
   if (authorDataArr.length <= endingIndex) {
-
+    loadMoreBtn.disabled = true; // setting loadMoreBtn to disabled
+    loadMoreBtn.textContent = 'No more data to load'; // changing button text
   }
 };
 
