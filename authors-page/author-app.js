@@ -15,7 +15,7 @@ fetch('https://cdn.freecodecamp.org/curriculum/news-author-page/authors.json')
     displayAuthors(authorDataArr.slice(startingIndex, endingIndex));
   })
   .catch((err) => { // Error to appear if no authors are loaded on the page. 
-    authorContainer.innerHTML = '<p class="error-msg">There was an error loading the authors</p>';
+    authorContainer.innerHTML = '<p class="error-msg">There was an error loading the authors</p>'
   });
 
 
@@ -31,6 +31,7 @@ const fetchMoreAuthors = () => {
   // Condition to show there is no more authors to load on the page
   if (authorDataArr.length <= endingIndex) {
     loadMoreBtn.disabled = true; // setting loadMoreBtn to disabled
+    loadMoreBtn.style.cursor = "not-allowed"; // Change cursor value from pointer to not allowed
     loadMoreBtn.textContent = 'No more data to load'; // changing button text
   }
 };
