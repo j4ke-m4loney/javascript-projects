@@ -8,7 +8,7 @@ const avatarUrl = "https://sea1.discourse-cdn.com/freecodecamp";
 
 const postsContainer = document.getElementById("posts-container");
 
-// Display data in Activity column 
+// Display data in the Activity column 
 const timeAgo = (time) => {
   const currentTime = new Date(); // the current time and date
   const lastPost = new Date(time); // the date of the last activity on a topic,
@@ -24,6 +24,15 @@ const timeAgo = (time) => {
     return `${hours}h ago`;
   } else {
     return `${days}d ago`;
+  }
+};
+
+// Function to convert Views count more readable format ex: 1K instead of 1000
+const viewCount = (views) => {
+  if (views >= 1000) {
+    return `${Math.floor(views / 1000)}k`;
+  } else {
+    return views;
   }
 };
 
@@ -65,8 +74,8 @@ const showLatestPosts = (data) => {
       </td>
       <td></td>
       <td>${posts_count - 1}</td>
-      <td>${views}</td>
-      <td></td>
+      <td>${viewCount()}</td> 
+      <td>${timeAgo(bumped_at)}</td>
     </tr>`;
   }).join(""); // To remove commas in columns 
 };
