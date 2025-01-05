@@ -15,7 +15,7 @@ const fetchData = async () => {
   try {
     const res = await fetch(forumLatest);
     const data = await res.json();
-
+    showLatestPosts(data); // calling function to see changes
   } catch (err) {
     console.log(err)
   }
@@ -25,5 +25,29 @@ fetchData();
 
 // To display data on the page
 const showLatestPosts = (data) => {
-
+  const { topic_list, users } = data; // Destructuring to these properties from data object
+  const { topics } = topic_list; // Destructuring the topics array from the topic_list object
+  postsContainer.innerHTML = topics.map((item) => { // Call map() on topics and assign it innerHTML
+    const {
+      id,
+      title,
+      views,
+      posts_count,
+      slug,
+      posters,
+      category_id,
+      bumped_at,
+    } = item; // Destructuring properties from the item object
+    // Building out the table to display the forum data
+    return `
+    <tr>
+      <td>
+        <p class="post-title">${title}</p>
+      </td>
+      <td></td>
+      <td>${posts_count - 1}</td>
+      <td>${views}</td>
+      <td></td>
+    </tr>`;
+  }).join(""); // To remove commas in columns 
 };
