@@ -17,7 +17,11 @@
       "type": "node",
       "request": "launch",
       "name": "Debug leaderboard.js",
-      "program": "${workspaceFolder}/leaderboard.js"
+      "program": "${workspaceFolder}/leaderboard.js",
+      "skipFiles": [
+        "<node_internals>/**", // Skip Node.js internals
+        "node_modules/**" // Skip all external library code
+      ]
     }
   ]
 }
