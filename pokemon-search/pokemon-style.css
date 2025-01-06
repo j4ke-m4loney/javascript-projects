@@ -1,0 +1,29 @@
+body {
+  background-color: midnightblue;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+legend {
+  padding-top: 5%;
+  padding-bottom: 2%;
+  color: white;
+  font-size: 1.5rem;
+}
+
+input {
+  font-size: 1.5rem;
+  box-sizing: 10px;
+}
+
+.form-container {
+  margin: auto;
+  width: 30%;
+  height: 1000px;
+  border: 3px solid white;
+  border-radius: 3vh;
+  text-align: center;
+}
