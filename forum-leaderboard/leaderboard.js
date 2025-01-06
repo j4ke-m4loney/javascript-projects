@@ -28,7 +28,7 @@ const forumCategory = (id) => {
     const { className, category } = allCategories[id]; // Destructure className and category from allCategories
 
     selectedCategory.className = className; // Adding to selectedCategory object
-    selectedCategory.category = category;
+    selectedCategory.category = category; // Adding to selectedCategory object
   } else {
     selectedCategory.className = "general";
     selectedCategory.category = "General";
@@ -70,6 +70,20 @@ const viewCount = (views) => {
   }
 };
 
+// Function that presents avatars participating in the conversation
+const avatars = (posters, users) => {
+  return posters.map((poster) => { // Start by looping through posters array to get all avatars 
+    const user = users.find((user) => user.id === poster.user_id); // Find correct users in user array
+    if (user) {
+      const avatar = user.avatar_template.replace(/{size}/, 30); // Customize Avatar size
+      const userAvatarUrl = avatar.startsWith("/user_avatar/") // Construct the userAvatarUrl
+        ? avatarUrl.concat(avatar)
+        : avatar;
+      return `<img src="${userAvatarUrl}" alt="${user.name}">` // Return the image for the user avatar
+    }
+  }).join("");
+};
+
 // To populate the forum leaderboard with data, you need to request the data from an API. 
 // It's known as an asynchronous operation, which means that tasks execute independently of the main program flow.
 // Using the async keyword to create an asynchronous function, which returns a promise.
@@ -107,7 +121,9 @@ const showLatestPosts = (data) => {
         <p class="post-title">${title}</p>
         ${forumCategory(category_id)}
       </td>
-      <td></td>
+      <td>
+      <div class="avatar-container"></div>
+      </td>
       <td>${posts_count - 1}</td>
       <td>${viewCount(views)}</td> 
       <td>${timeAgo(bumped_at)}</td>
