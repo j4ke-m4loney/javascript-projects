@@ -8,6 +8,40 @@ const avatarUrl = "https://sea1.discourse-cdn.com/freecodecamp";
 
 const postsContainer = document.getElementById("posts-container");
 
+// Building out a category object to hold all forum categories and classNames for styling
+const allCategories = {
+  299: { category: "Career Advice", className: "career" },
+  409: { category: "Project Feedback", className: "feedback" },
+  417: { category: "freeCodeCamp Support", className: "support" },
+  421: { category: "JavaScript", className: "javascript" },
+  423: { category: "HTML - CSS", className: "html-css" },
+  424: { category: "Python", className: "python" },
+  432: { category: "You Can Do This!", className: "motivation" },
+  560: { category: "Backend Development", className: "backend" }
+};
+
+// Function to retrieve the category name from allCategories 
+const forumCategory = (id) => {
+  let selectedCategory = {}; // Used to store category name and class name for each category 
+
+  if (allCategories.hasOwnProperty(id)) { // Checks is allCategories object has a property of id
+    const { className, category } = allCategories[id]; // Destructure className and category from allCategories
+
+    selectedCategory.className = className; // Adding to selectedCategory object
+    selectedCategory.category = category;
+  } else {
+    selectedCategory.className = "general";
+    selectedCategory.category = "General";
+    selectedCategory.id = 1;
+  }
+  const url = `${forumCategoryUrl}${selectedCategory.className}/${id}`; // Every category has a URL that points to the category of freeCodeCamp forum
+  const linkText = selectedCategory.category; // This will display the name of the category
+  const linkClass = `category ${selectedCategory.className}`; // Class names used to apply styles from the anchor element
+
+  return `<a href="${url}" class="${linkClass}" target="_blank">${linkText}</a>`;
+
+};
+
 // Display data in the Activity column 
 const timeAgo = (time) => {
   const currentTime = new Date(); // the current time and date
@@ -71,6 +105,7 @@ const showLatestPosts = (data) => {
     <tr>
       <td>
         <p class="post-title">${title}</p>
+        ${forumCategory(category_id)}
       </td>
       <td></td>
       <td>${posts_count - 1}</td>
