@@ -25,5 +25,26 @@ const getPokemon = async () => {
     pokemonName.textContent = `${data.name.toUpperCase()}`;
     pokemonID.textContent = `#${data.id}`;
     weight.textContent = `Weight: ${data.weight}`;
+    height.textContent = `Height: ${data.height}`;
+    spriteContainer.innerHTML = `
+    <img id="sprite" src="${data.sprites.front_default}" alt="${data.name} front default sprite">`;
+
+    // Set stats
+    hp.textContent = data.stats[0].base_stat;
+    attack.textContent = data.stats[1].base_stat;
+    defense.textContent = data.stats[2].base_stat;
+    specialAttack.textContent = data.stats[3].base_stat;
+    specialDefense.textContent = data.stat[4].base_stat;
+    speed.textContent = data.stats[5].base_stat;
+
+    // Set types
+
+    types.innerHTML = data.types
+      .map(obj => `<span class="type ${obj.type.name}">${obj.type.name}</span>`)
+      .join('');
+  } catch (err) {
+    resetDisplay();
+    alert('Pokemon not found');
+    console.log(`Pokemon not found: ${err}`);
   }
 };
