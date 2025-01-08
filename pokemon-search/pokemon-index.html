@@ -6,24 +6,69 @@
   <meta name="viewport" content="width=device-width" , initial-scale="1.0">
   <title>Pokemon Search App</title>
   <link rel="stylesheet" href="/pokemon-style.css">
+  <link rel="icon" type="image/png" href="https://cdn.freecodecamp.org/universal/favicons/favicon.ico" />
 </head>
 
 <body>
-  <h1>Pokemon Search App</h1>
+  <main>
+    <h1>Pokemon Search App</h1>
 
-  <div id="form-container" class="form-container">
-    <div id="search-container">
-      <legend>Search for Pokemon Name or ID</legend>
-      <input id="search-input">
-      <button id="search-btn" class="search-btn">Search</button>
+    <div id="container" class="container">
+      <form id="search-form">
+        <label for="search-input">Search for Pokemon Name or ID:</label>
+        <input type="text" name="name" id="search-input" required />
+        <button id="search-button" class="search-button">Search</button>
+      </form>
+      <div class="output">
+        <div class="top-container">
+          <div class="name-and-id">
+            <span id="pokemon-name"></span>
+            <span id="pokemon-id"></span>
+          </div>
+          <div class="size">
+            <span id="weight"></span>
+            <span id="height"></span>
+          </div>
+          <div id="sprite-container" class="sprite-container"></div>
+          <div id="types"></div>
+        </div>
+        <div class="bottom-container">
+          <table>
+            <tr>
+              <th>Base</th>
+              <th>Stats</th>
+            </tr>
+            <tr>
+              <td>HP:</td>
+              <td id="hp"></td>
+            </tr>
+            <tr>
+              <td>Attack:</td>
+              <td id="attack"></td>
+            </tr>
+            <tr>
+              <td>Defense:</td>
+              <td id="defense"></td>
+            </tr>
+            <tr>
+              <td>Sp. Attack:</td>
+              <td id="special-attack"></td>
+            </tr>
+            <tr>
+              <td>Sp. Defense:</td>
+              <td id="special-defense"></td>
+            </tr>
+            <tr>
+              <td>Speed:</td>
+              <td id="speed" class="speed"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
-
-    <div id="pokemon-info"></div>
-
-    <div id="pokemon-table"></div>
-
-  </div>
-  <script src="/pokemon-app.js"></script>
+    </div>
+    <script src="/pokemon-app.js"></script>
+  </main>
 </body>
 
 </html>
