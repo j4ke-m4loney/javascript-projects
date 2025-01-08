@@ -48,3 +48,26 @@ const getPokemon = async () => {
     console.log(`Pokemon not found: ${err}`);
   }
 };
+
+const resetDisplay = () => {
+  const sprite = document.getElementById('sprite');
+  if (sprite) sprite.remove();
+
+  // reset stats
+  pokemonName.textContent = ``;
+  pokemonID.textContent = '';
+  types.innerHTML = '';
+  height.textContent = '';
+  weight.textContent = '';
+  hp.textContent = '';
+  attack.textContent = '';
+  defense.textContent = '';
+  specialAttack.textContent = '';
+  specialDefense.textContent = '';
+  speed.textContent = '';
+};
+
+searchForm.addEventListener('submit', e => {
+  e.preventDefault();
+  getPokemon();
+})
