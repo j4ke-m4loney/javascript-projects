@@ -5,25 +5,36 @@ body {
 h1 {
   color: white;
   text-align: center;
+  font-size: 3rem;
 }
 
 legend {
   padding-top: 5%;
   padding-bottom: 2%;
   color: white;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 input {
   font-size: 1.5rem;
   box-sizing: 10px;
+  padding: 10px;
 }
 
 .form-container {
   margin: auto;
-  width: 30%;
+  width: 40%;
   height: 1000px;
   border: 3px solid white;
   border-radius: 3vh;
   text-align: center;
+}
+
+.search-btn {
+  background-color: purple;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  border-radius: 2rem;
+  margin-left: 20px;
 }
