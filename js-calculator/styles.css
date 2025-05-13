@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
+#key{
+  display: grid;
+  grid-template-columns: (4, 1fr);
+  gap: 10px;
+}
+
+button{
+  height: 80px;
+}
