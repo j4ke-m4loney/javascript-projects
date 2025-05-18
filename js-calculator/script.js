@@ -17,7 +17,7 @@ function appendToDisplay(value){
     total = storedCalculation.join("")
   }
 
- 
+// Clear screen with AC
 function clearScreen(){
   storedCalculation = [];
   total = "";
