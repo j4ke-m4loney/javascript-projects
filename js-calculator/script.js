@@ -48,6 +48,7 @@ function convertToPercent(){
   total = percent.toString()
 }
 
+// Function for the negative and positive 
 function toggleSign(){
   if(screenDisplay.textContent.startsWith("−")){
     screenDisplay.textContent = screenDisplay.textContent.slice(1)
