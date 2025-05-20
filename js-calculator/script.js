@@ -40,6 +40,7 @@ function evaluateExpression(){
     }
 }
 
+// Convert calculation to a percentage 
 function convertToPercent(){
   const currentNumber = parseFloat(storedCalculation) || 0;
   const percent = currentNumber / 100;
