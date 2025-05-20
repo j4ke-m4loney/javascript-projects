@@ -5,7 +5,7 @@ let total = ""
 
 const screenDisplay = document.querySelector("#display")
 
-
+// Default screen value Function
 function appendToDisplay(value){
   if(screenDisplay.textContent === "0" || screenDisplay.textContent === "Error"){
     screenDisplay.textContent = value;
