@@ -60,7 +60,7 @@ function toggleSign(){
 
 }
 
-
+// Main calculator function 
 function calculate(button) {
   const value = button.textContent;
   console.log("clicked:", value);
