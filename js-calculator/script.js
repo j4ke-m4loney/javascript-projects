@@ -24,6 +24,7 @@ function clearScreen(){
   screenDisplay.textContent = 0;
 }
 
+// Function to ensure the expression is correct
 function evaluateExpression(){
     try {
       
