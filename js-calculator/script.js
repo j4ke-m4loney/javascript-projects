@@ -84,6 +84,7 @@ function calculate(button) {
   }
 }
 
+// Event listener 
 function initCalculator() {
   buttons.forEach((button) =>
     button.addEventListener("click", () => calculate(button))
